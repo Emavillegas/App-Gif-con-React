@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { AddCategory } from './components/AddCategory';
+import { GifGrid } from './components/GifGrid';
 
 
 
@@ -8,8 +9,10 @@ export const GifExpertApp = () => {
 
     const [categories, setCategories] = useState(['One Punch', 'Dragon Ball']);
 
-    const ondAddCategory = () => {
-        setCategories([...categories, 'Valorant']);v /// el operador spread (...) agarra todo lo que ya tenemos y le agrega lo que le sigue a la coma. 
+    const onAddCategory = (newCategory) => {
+
+        if (categories.includes(newCategory) ) return; // quiere decir que si la catergoria ya existe, no se hace nada. Si no existe, se la agrega.
+        setCategories([newCategory, ...categories]); /// el operador spread (...) agarra todo lo que ya tenemos y le agrega lo que le sigue a la coma. 
 
 
         /// para insertarlo al inicio seria: ['valorant', ...categories]
@@ -27,19 +30,30 @@ export const GifExpertApp = () => {
         
             {/* Input */}
 
-            <AddCategory/>
+            <AddCategory 
+            //setCategories = { setCategories } 
+            onNewCategory = {onAddCategory}
+
+            />
+
 
             {/* Listado de Gif */}
-            <button onClick={ondAddCategory}>Agregar </button>
+            {/* <button onClick={onAddCategory}>Agregar </button> */}
 
 
                 {/* Gif Item */}
 
-            <ol>
-                {categories.map(category=>{  /// el map me permite barrer cada uno de los elementos del arreglo y regresar algo nuevo
-                    return <li key={category}> {category} </li>
-                })}
-            </ol>
+                {
+            categories.map((category)=>{  /// el map me permite barrer cada uno de los elementos del arreglo y regresar algo nuevo
+                return (
+                    <GifGrid 
+                        key={category}
+                        category={category}
+                    />  
+                
+                )
+            })}
+            
 
         </>
 
