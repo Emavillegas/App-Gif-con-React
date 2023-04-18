@@ -4,7 +4,8 @@ import { GifExpertApp } from './GifExpertApp'
 import './style.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // ayuda principalmente a indentificar componentes que tienen problemas
+  <React.StrictMode>  
     <GifExpertApp />
   </React.StrictMode>,
 );
